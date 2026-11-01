@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- AppCompat-based Settings look, as CollapsingToolbarAppCompatActivity needs -->
+    <style name="Theme.Graphite" parent="@style/Theme.CollapsingToolbar.Settings">
+        <item name="preferenceTheme">@style/PreferenceTheme.SettingsLib</item>
+        <!-- The collapsing toolbar supplies the action bar -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+</resources>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Caffeine -->
+    <string name="caffeine_title">Caffeine</string>
+    <string name="caffeine_notification">Keeping the screen on. Tap to stop.</string>
+    <string name="caffeine_off">Off</string>
+    <string name="caffeine_infinite">Until turned off</string>
+    <string name="caffeine_minutes"><xliff:g id="minutes" example="5">%d</xliff:g> min</string>
+
+    <!-- Status bar -->
+    <string name="statusbar_title">Status bar</string>
+    <string name="statusbar_summary">Clock seconds and which icons are shown</string>
+    <string name="statusbar_clock_seconds">Show seconds</string>
+    <string name="statusbar_clock_seconds_summary">Show seconds in the status bar clock</string>
+    <string name="statusbar_icons">Icons</string>
+    <string name="slot_airplane">Airplane mode</string>
+    <string name="slot_alarm_clock">Alarm</string>
+    <string name="slot_battery">Battery</string>
+    <string name="slot_bluetooth">Bluetooth</string>
+    <string name="slot_camera">Camera in use</string>
+    <string name="slot_cast">Cast</string>
+    <string name="slot_clock">Clock</string>
+    <string name="slot_connected_display">Connected display</string>
+    <string name="slot_data_saver">Data Saver</string>
+    <string name="slot_ethernet">Ethernet</string>
+    <string name="slot_headset">Headset</string>
+    <string name="slot_hotspot">Hotspot</string>
+    <string name="slot_location">Location</string>
+    <string name="slot_managed_profile">Work profile</string>
+    <string name="slot_microphone">Microphone in use</string>
+    <string name="slot_mobile">Mobile signal</string>
+    <string name="slot_mute">Ringer muted</string>
+    <string name="slot_nfc">NFC</string>
+    <string name="slot_rotate">Rotation suggestion</string>
+    <string name="slot_screen_record">Screen recording</string>
+    <string name="slot_sensors_off">Sensors off</string>
+    <string name="slot_sync_active">Sync active</string>
+    <string name="slot_sync_failing">Sync failing</string>
+    <string name="slot_tty">TTY mode</string>
+    <string name="slot_volume">Vibrate mode</string>
+    <string name="slot_vpn">VPN</string>
+    <string name="slot_wifi">Wi-Fi</string>
+    <string name="slot_zen">Do Not Disturb</string>
+    <!-- Lock screen -->
+    <string name="lockscreen_title">Lock screen</string>
+    <string name="lockscreen_summary">Charging information</string>
+    <string name="charging_info_title">Charging information</string>
+    <string name="charging_info_summary">While charging, show current, voltage, power and battery temperature</string>
+
+    <!-- Power menu -->
+    <string name="power_menu_title">Power menu</string>
+    <string name="power_menu_summary">Actions, order and advanced restart</string>
+    <string name="power_menu_hint">Tick the actions to show and drag them into order. Power off is always shown.</string>
+    <string name="power_menu_reset">Reset to default</string>
+    <string name="power_menu_drag">Drag to reorder</string>
+    <string name="action_power">Power off</string>
+    <string name="action_restart">Restart</string>
+    <string name="action_restart_recovery">Restart to recovery</string>
+    <string name="action_restart_bootloader">Restart to bootloader</string>
+    <string name="action_restart_systemui">Restart SystemUI</string>
+    <string name="action_screenshot">Screenshot</string>
+    <string name="action_emergency">Emergency</string>
+    <string name="action_lockdown">Lockdown</string>
+    <string name="action_airplane">Airplane mode</string>
+    <string name="action_silent">Sound mode</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_bugreport">Bug report</string>
+    <string name="action_logout">Log out</string>
+
+    <!-- Screenshot protection override -->
+    <string name="secure_override_title">Screenshot protection override</string>
+    <string name="secure_override_summary">Let system screenshots capture protected apps</string>
+    <string name="secure_override_explanation">Apps that block screenshots (FLAG_SECURE) can still be captured by the system screenshot for the apps selected here. Other apps, screen sharing and the recents screen still see them as protected.</string>
+    <string name="secure_override_stealth">Don\'t notify apps</string>
+    <string name="secure_override_stealth_summary">Selected apps aren\'t told when you take a screenshot of them</string>
+    <string name="secure_override_apps">Apps</string>
+</resources>

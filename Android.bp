@@ -13,13 +13,17 @@ android_app {
     static_libs: [
         "androidx.core_core-ktx",
         "androidx.preference_preference",
+        "androidx.recyclerview_recyclerview",
         "SettingsLibCollapsingToolbarBaseActivity",
         "SettingsLibSettingsTheme",
     ],
     optimize: {
         enabled: false,
     },
-    required: ["privapp_whitelist_org.graphite.parts"],
+    required: [
+        "privapp_whitelist_org.graphite.parts",
+        "default-permissions_org.graphite.parts",
+    ],
 }
 
 prebuilt_etc {
@@ -27,5 +31,13 @@ prebuilt_etc {
     system_ext_specific: true,
     sub_dir: "permissions",
     src: "privapp_whitelist_org.graphite.parts.xml",
+    filename_from_src: true,
+}
+
+prebuilt_etc {
+    name: "default-permissions_org.graphite.parts",
+    system_ext_specific: true,
+    sub_dir: "default-permissions",
+    src: "default-permissions_org.graphite.parts.xml",
     filename_from_src: true,
 }

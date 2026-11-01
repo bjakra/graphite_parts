@@ -3,6 +3,34 @@
     android:title="@string/app_name">
 
     <Preference
+        android:key="statusbar"
+        android:title="@string/statusbar_title"
+        android:summary="@string/statusbar_summary"
+        android:icon="@drawable/ic_statusbar"
+        android:fragment="org.graphite.parts.statusbar.StatusBarFragment" />
+
+    <Preference
+        android:key="lockscreen"
+        android:title="@string/lockscreen_title"
+        android:summary="@string/lockscreen_summary"
+        android:icon="@drawable/ic_lockscreen"
+        android:fragment="org.graphite.parts.lockscreen.LockScreenFragment" />
+
+    <Preference
+        android:key="powermenu"
+        android:title="@string/power_menu_title"
+        android:summary="@string/power_menu_summary"
+        android:icon="@drawable/ic_power"
+        android:fragment="org.graphite.parts.powermenu.PowerMenuFragment" />
+
+    <Preference
+        android:key="secure_override"
+        android:title="@string/secure_override_title"
+        android:summary="@string/secure_override_summary"
+        android:icon="@drawable/ic_screenshot"
+        android:fragment="org.graphite.parts.privacy.SecureOverrideFragment" />
+
+    <Preference
         android:key="about"
         android:title="@string/about_title"
         android:selectable="false" />

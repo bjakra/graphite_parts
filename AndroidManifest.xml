@@ -3,11 +3,16 @@
     package="org.graphite.parts">
 
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:label="@string/app_name"
         android:icon="@drawable/ic_graphite"
-        android:theme="@style/Theme.SubSettingsBase"
+        android:theme="@style/Theme.Graphite"
         android:defaultToDeviceProtectedStorage="true"
         android:directBootAware="true">
 
@@ -33,5 +38,25 @@
             <meta-data android:name="com.android.settings.icon"
                 android:resource="@drawable/ic_graphite" />
         </activity>
+
+        <!-- Caffeine: keep the screen on from Quick Settings -->
+        <service
+            android:name=".caffeine.CaffeineTileService"
+            android:exported="true"
+            android:icon="@drawable/ic_caffeine"
+            android:label="@string/caffeine_title"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".caffeine.CaffeineService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Keeps the screen on while the user's Caffeine tile is active" />
+        </service>
     </application>
 </manifest>
