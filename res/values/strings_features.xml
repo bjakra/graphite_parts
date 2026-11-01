@@ -59,6 +59,7 @@
     <string name="action_restart_bootloader">Restart to bootloader</string>
     <string name="action_restart_systemui">Restart SystemUI</string>
     <string name="action_screenshot">Screenshot</string>
+    <string name="action_wallet">Wallet (default payment app)</string>
     <string name="action_emergency">Emergency</string>
     <string name="action_lockdown">Lockdown</string>
     <string name="action_airplane">Airplane mode</string>

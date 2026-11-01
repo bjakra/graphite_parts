@@ -120,6 +120,7 @@ class PowerMenuFragment : Fragment() {
             "restart_bootloader" to R.string.action_restart_bootloader,
             "restart_systemui" to R.string.action_restart_systemui,
             "screenshot" to R.string.action_screenshot,
+            "wallet" to R.string.action_wallet,
             "emergency" to R.string.action_emergency,
             "lockdown" to R.string.action_lockdown,
             "airplane" to R.string.action_airplane,
