@@ -75,4 +75,8 @@
     <string name="secure_override_stealth">Don\'t notify apps</string>
     <string name="secure_override_stealth_summary">Selected apps aren\'t told when you take a screenshot of them</string>
     <string name="secure_override_apps">Apps</string>
+    <!-- Extra Quick Settings tiles -->
+    <string name="tile_headsup">Heads-up</string>
+    <string name="tile_aod">Always-on display</string>
+    <string name="tile_sync">Auto-sync</string>
 </resources>
