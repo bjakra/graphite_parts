@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Graphite</string>
+    <string name="settings_summary">Status bar, lock screen, power menu and more</string>
+    <string name="about_title">Graphite build</string>
+</resources>

@@ -1,0 +1,31 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+android_app {
+    name: "GraphiteParts",
+    srcs: ["src/**/*.kt"],
+    resource_dirs: ["res"],
+    certificate: "platform",
+    privileged: true,
+    system_ext_specific: true,
+    platform_apis: true,
+    static_libs: [
+        "androidx.core_core-ktx",
+        "androidx.preference_preference",
+        "SettingsLibCollapsingToolbarBaseActivity",
+        "SettingsLibSettingsTheme",
+    ],
+    optimize: {
+        enabled: false,
+    },
+    required: ["privapp_whitelist_org.graphite.parts"],
+}
+
+prebuilt_etc {
+    name: "privapp_whitelist_org.graphite.parts",
+    system_ext_specific: true,
+    sub_dir: "permissions",
+    src: "privapp_whitelist_org.graphite.parts.xml",
+    filename_from_src: true,
+}

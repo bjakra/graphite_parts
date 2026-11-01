@@ -1,0 +1,7 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp" android:height="24dp" android:viewportWidth="24" android:viewportHeight="24"
+    android:tint="?android:attr/colorControlNormal">
+    <!-- A hexagon: graphite's carbon lattice -->
+    <path android:fillColor="@android:color/white"
+        android:pathData="M12,2L20.66,7V17L12,22L3.34,17V7ZM12,4.31L5.34,8.15V15.85L12,19.69L18.66,15.85V8.15Z" />
+</vector>
