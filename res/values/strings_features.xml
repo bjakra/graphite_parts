@@ -75,8 +75,8 @@
 
     <!-- Screenshot protection override -->
     <string name="secure_override_title">Screenshot protection override</string>
-    <string name="secure_override_summary">Let system screenshots capture protected apps</string>
-    <string name="secure_override_explanation">Apps that block screenshots (FLAG_SECURE) can still be captured by the system screenshot for the apps selected here. Other apps, screen sharing and the recents screen still see them as protected.</string>
+    <string name="secure_override_summary">Let system screenshots and recordings capture protected apps</string>
+    <string name="secure_override_explanation">Apps that block screenshots (FLAG_SECURE) can still be captured for the apps selected here, by the system screenshot and the system screen recorder. Other apps, screen sharing and the recents screen still see them as protected.</string>
     <string name="secure_override_stealth">Don\'t notify apps</string>
     <string name="secure_override_stealth_summary">Selected apps aren\'t told when you take a screenshot of them</string>
     <string name="secure_override_apps">Apps</string>
