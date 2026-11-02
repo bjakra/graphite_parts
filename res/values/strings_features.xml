@@ -86,5 +86,4 @@
     <string name="tile_sync">Auto-sync</string>
     <string name="weather_title">Weather</string>
     <string name="weather_summary">Weather on the lock screen, off by default</string>
-    <string name="power_menu_android11_layout">Android 11 layout, with a wallet card area</string>
 </resources>
