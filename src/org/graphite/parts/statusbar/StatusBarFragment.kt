@@ -55,8 +55,6 @@ class StatusBarFragment : PreferenceFragmentCompat() {
 
         screen.addPreference(secureSwitch(GraphiteSettings.CLOCK_AM_PM,
             R.string.statusbar_clock_am_pm, R.string.statusbar_clock_am_pm_summary))
-        screen.addPreference(secureSwitch(GraphiteSettings.CLOCK_RIGHT,
-            R.string.statusbar_clock_right, R.string.statusbar_clock_right_summary))
         screen.addPreference(secureSwitch(GraphiteSettings.NETWORK_TRAFFIC,
             R.string.statusbar_network_traffic, R.string.statusbar_network_traffic_summary))
         screen.addPreference(SwitchPreferenceCompat(context).apply {

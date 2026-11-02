@@ -14,8 +14,6 @@
     <string name="statusbar_clock_seconds_summary">Show seconds in the status bar clock</string>
     <string name="statusbar_clock_am_pm">Show AM/PM</string>
     <string name="statusbar_clock_am_pm_summary">Only applies when the phone uses 12-hour time</string>
-    <string name="statusbar_clock_right">Clock on the right</string>
-    <string name="statusbar_clock_right_summary">Move the clock next to the status icons</string>
     <string name="statusbar_network_traffic">Network speed</string>
     <string name="statusbar_network_traffic_summary">Show current download and upload speed</string>
     <string name="statusbar_battery_percent">Show battery percentage</string>
