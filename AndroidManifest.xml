@@ -40,6 +40,8 @@
                 android:resource="@string/settings_summary" />
             <meta-data android:name="com.android.settings.icon"
                 android:resource="@drawable/ic_graphite" />
+            <!-- Settings applies its own light or dark tint to the icon -->
+            <meta-data android:name="com.android.settings.icon_tintable" android:value="true" />
         </activity>
 
         <!-- Caffeine: keep the screen on from Quick Settings -->

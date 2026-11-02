@@ -93,7 +93,7 @@ class StatusBarFragment : PreferenceFragmentCompat() {
      * empty margins, so this crops to the visible pixels first and then fits them to the same size.
      */
     private fun Drawable.uniform(context: Context): Drawable {
-        val attrs = context.obtainStyledAttributes(intArrayOf(android.R.attr.textColorSecondary))
+        val attrs = context.obtainStyledAttributes(intArrayOf(android.R.attr.textColorPrimary))
         val tint = attrs.getColorStateList(0) ?: ColorStateList.valueOf(Color.GRAY)
         attrs.recycle()
         val source = mutate().apply { setTintList(tint) }
