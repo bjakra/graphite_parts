@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
@@ -50,6 +51,16 @@ class PowerMenuFragment : Fragment() {
         })
         touchHelper.attachToRecyclerView(list)
         adapter.touchHelper = touchHelper
+        view.findViewById<CompoundButton>(R.id.classic_power_menu).apply {
+            isChecked = Settings.Secure.getInt(context.contentResolver, GraphiteSettings.CLASSIC_POWER_MENU, 1) != 0
+            setOnCheckedChangeListener { _, checked ->
+                Settings.Secure.putInt(context.contentResolver, GraphiteSettings.CLASSIC_POWER_MENU, if (checked) 1 else 0)
+            }
+        }
+        view.findViewById<View>(R.id.classic_power_menu_settings).setOnClickListener {
+            val intent = requireContext().packageManager.getLaunchIntentForPackage(CLASSIC_POWER_MENU_PACKAGE)
+            if (intent != null) startActivity(intent)
+        }
         view.findViewById<View>(R.id.reset).setOnClickListener {
             Settings.Secure.putString(requireContext().contentResolver, GraphiteSettings.POWER_MENU_ACTIONS, null)
             load()
@@ -131,3 +142,5 @@ class PowerMenuFragment : Fragment() {
         )
     }
 }
+
+private const val CLASSIC_POWER_MENU_PACKAGE = "com.kieronquinn.app.classicpowermenu"

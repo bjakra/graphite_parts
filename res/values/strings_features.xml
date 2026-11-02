@@ -16,6 +16,8 @@
     <string name="statusbar_clock_am_pm_summary">Only applies when the phone uses 12-hour time</string>
     <string name="statusbar_network_traffic">Network speed</string>
     <string name="statusbar_network_traffic_summary">Show current download and upload speed</string>
+    <string name="statusbar_hide_notification_icons">Hide notification icons</string>
+    <string name="statusbar_hide_notification_icons_summary">Keep the area beside the camera cutout clear</string>
     <string name="statusbar_battery_percent">Show battery percentage</string>
     <string name="statusbar_icons">Icons</string>
     <string name="slot_airplane">Airplane mode</string>
@@ -86,4 +88,7 @@
     <string name="tile_sync">Auto-sync</string>
     <string name="weather_title">Weather</string>
     <string name="weather_summary">Weather on the lock screen, off by default</string>
+    <string name="power_menu_classic">Use Classic Power Menu</string>
+    <string name="power_menu_classic_settings">Classic Power Menu settings</string>
+    <string name="power_menu_fallback_hint">The list below is the system menu, which appears if Classic Power Menu can\'t open or is turned off.</string>
 </resources>

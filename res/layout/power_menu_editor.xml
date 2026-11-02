@@ -3,6 +3,26 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <Switch
+        android:id="@+id/classic_power_menu"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:paddingHorizontal="24dp" android:paddingVertical="16dp"
+        android:text="@string/power_menu_classic" />
+
+    <Button
+        android:id="@+id/classic_power_menu_settings"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:text="@string/power_menu_classic_settings" />
+
+    <TextView
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:paddingHorizontal="24dp" android:paddingTop="12dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="?android:attr/textColorSecondary"
+        android:text="@string/power_menu_fallback_hint" />
+
     <TextView
         android:layout_width="match_parent" android:layout_height="wrap_content"
         android:paddingHorizontal="24dp" android:paddingVertical="12dp"
