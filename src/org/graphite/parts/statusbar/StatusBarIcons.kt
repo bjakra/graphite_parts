@@ -18,7 +18,7 @@ object StatusBarIcons {
         "battery" to listOf("android:ic_battery", "$SYSTEMUI:ic_battery_unknown"),
         "bluetooth" to listOf("$SYSTEMUI:stat_sys_data_bluetooth_connected"),
         "camera" to listOf("android:perm_group_camera"),
-        "cast" to listOf("$SYSTEMUI:stat_sys_cast"),
+        "cast" to listOf("$SYSTEMUI:ic_cast", "android:ic_cast", "$SYSTEMUI:stat_sys_cast"),
         "clock" to listOf("android:ic_clock", "android:perm_group_calendar"),
         "connected_display" to listOf("$SYSTEMUI:stat_sys_connected_display"),
         "data_saver" to listOf("$SYSTEMUI:stat_sys_data_saver"),
