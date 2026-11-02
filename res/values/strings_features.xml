@@ -84,4 +84,6 @@
     <string name="tile_headsup">Heads-up</string>
     <string name="tile_aod">Always-on display</string>
     <string name="tile_sync">Auto-sync</string>
+    <string name="weather_title">Weather</string>
+    <string name="weather_summary">Weather on the lock screen, off by default</string>
 </resources>

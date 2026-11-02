@@ -31,6 +31,15 @@
         android:fragment="org.graphite.parts.privacy.SecureOverrideFragment" />
 
     <Preference
+        android:title="@string/weather_title"
+        android:summary="@string/weather_summary"
+        android:icon="@drawable/ic_weather">
+        <intent
+            android:action="org.graphite.weather.SETTINGS"
+            android:targetPackage="org.graphite.weather" />
+    </Preference>
+
+    <Preference
         android:key="about"
         android:title="@string/about_title"
         android:selectable="false" />
