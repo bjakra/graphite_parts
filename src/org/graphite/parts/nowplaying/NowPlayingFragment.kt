@@ -113,12 +113,14 @@ class NowPlayingFragment : PreferenceFragmentCompat() {
         val context = context ?: return
         NowPlayingApi.load({ NowPlayingApi.state(context) }) { state ->
             if (!isAdded) return@load
-            val available = state?.getString("state") == "available"
+            // Before the first switch-on, Now Playing reports "notSetup" (AMM's setup state): it's
+            // available and off; turning it on here completes the setup
+            val available = state?.getString("state") in setOf("available", "notSetup")
             enabled.isEnabled = available
-            enabled.isChecked = available && state!!.getBoolean("mainEnabled")
+            enabled.isChecked = state?.getString("state") == "available" && state.getBoolean("mainEnabled")
             if (!available) enabled.summary = getString(R.string.nowplaying_unavailable)
             listOf(history, notifications, settings, database, backup).forEach { it.isEnabled = available }
-            recognise.isEnabled = available && state!!.getBoolean("mainEnabled")
+            recognise.isEnabled = enabled.isChecked
             val track = state?.getString("lastTrack")
             history.summary = if (track != null) {
                 getString(R.string.nowplaying_history_last, track, state.getString("lastArtist"))
