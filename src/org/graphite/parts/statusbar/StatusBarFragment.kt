@@ -12,6 +12,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.provider.Settings
+import android.text.format.DateFormat
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
@@ -23,6 +24,8 @@ import org.graphite.parts.R
  * `clock_seconds` and `icon_blacklist` (the comma-separated list of hidden slots).
  */
 class StatusBarFragment : PreferenceFragmentCompat() {
+
+    private var amPmSwitch: SwitchPreferenceCompat? = null
 
     private fun secureSwitch(setting: String, titleRes: Int, summaryRes: Int) =
         SwitchPreferenceCompat(preferenceManager.context).apply {
@@ -53,8 +56,9 @@ class StatusBarFragment : PreferenceFragmentCompat() {
             }
         })
 
-        screen.addPreference(secureSwitch(GraphiteSettings.CLOCK_AM_PM,
-            R.string.statusbar_clock_am_pm, R.string.statusbar_clock_am_pm_summary))
+        amPmSwitch = secureSwitch(GraphiteSettings.CLOCK_AM_PM,
+            R.string.statusbar_clock_am_pm, R.string.statusbar_clock_am_pm_summary)
+        screen.addPreference(amPmSwitch!!)
         screen.addPreference(secureSwitch(GraphiteSettings.NETWORK_TRAFFIC,
             R.string.statusbar_network_traffic, R.string.statusbar_network_traffic_summary))
         screen.addPreference(secureSwitch(GraphiteSettings.HIDE_NOTIFICATION_ICONS,
@@ -148,5 +152,17 @@ class StatusBarFragment : PreferenceFragmentCompat() {
     private companion object {
         const val ICON_BOX_DP = 24
         const val ICON_FILL = 0.8f
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // AM/PM only exists in 12-hour time; say so instead of a switch that seems to do nothing.
+        val twentyFourHour = DateFormat.is24HourFormat(requireContext())
+        amPmSwitch?.apply {
+            isEnabled = !twentyFourHour
+            summary = getString(
+                if (twentyFourHour) R.string.statusbar_clock_am_pm_24h else R.string.statusbar_clock_am_pm_summary
+            )
+        }
     }
 }
