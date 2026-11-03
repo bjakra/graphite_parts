@@ -49,6 +49,7 @@ class GraphiteActivity : CollapsingToolbarAppCompatActivity(),
             "org.graphite.parts.privacy.SecureOverrideFragment",
             "org.graphite.parts.nowplaying.NowPlayingFragment",
             "org.graphite.parts.nowplaying.NowPlayingSettingsFragment",
+            "org.graphite.parts.nowplaying.NowPlayingDatabaseFragment",
         )
     }
 }

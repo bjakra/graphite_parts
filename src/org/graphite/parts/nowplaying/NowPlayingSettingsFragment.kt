@@ -34,6 +34,8 @@ class NowPlayingSettingsFragment : PreferenceFragmentCompat() {
         switch(settings, "triggerWhenScreenOn", R.string.nowplaying_screen_on,
             R.string.nowplaying_screen_on_summary)?.let(screen::addPreference)
 
+        bedtime(settings)
+
         val advanced = PreferenceCategory(preferenceManager.context).apply {
             title = getString(R.string.nowplaying_advanced)
         }
@@ -44,6 +46,54 @@ class NowPlayingSettingsFragment : PreferenceFragmentCompat() {
             R.string.nowplaying_small_cores_summary)?.let(advanced::addPreference)
         switch(settings, "enableLogging", R.string.nowplaying_logging,
             R.string.nowplaying_logging_summary)?.let(advanced::addPreference)
+    }
+
+    /** AMM's "Disable at bedtime": a switch and start and end times (minutes of the day). */
+    private fun bedtime(settings: Bundle) {
+        val context = preferenceManager.context
+        val start = settings.getBundle("bedtimeModeStart") ?: return
+        val end = settings.getBundle("bedtimeModeEnd") ?: return
+        val times = listOf(
+            Triple("bedtimeModeStart", R.string.nowplaying_bedtime_start, start.getLong("value")),
+            Triple("bedtimeModeEnd", R.string.nowplaying_bedtime_end, end.getLong("value")),
+        ).map { (key, title, minutes) ->
+            Preference(context).apply {
+                this.title = getString(title)
+                summary = format(minutes)
+                setOnPreferenceClickListener { pref ->
+                    val current = settingMinutes[key] ?: minutes
+                    android.app.TimePickerDialog(context, { _, hour, minute ->
+                        val value = hour * 60L + minute
+                        settingMinutes[key] = value
+                        pref.summary = format(value)
+                        NowPlayingApi.set(context, key, value)
+                    }, (current / 60).toInt(), (current % 60).toInt(),
+                        android.text.format.DateFormat.is24HourFormat(context)).show()
+                    true
+                }
+            }
+        }
+        val enabled = switch(settings, "bedtimeModeEnabled", R.string.nowplaying_bedtime,
+            R.string.nowplaying_bedtime_summary) as? SwitchPreferenceCompat ?: return
+        preferenceScreen.addPreference(enabled)
+        times.forEach {
+            preferenceScreen.addPreference(it)
+            it.isEnabled = enabled.isChecked
+        }
+        val listener = enabled.onPreferenceChangeListener
+        enabled.setOnPreferenceChangeListener { pref, value ->
+            times.forEach { it.isEnabled = value as Boolean }
+            listener?.onPreferenceChange(pref, value) ?: true
+        }
+    }
+
+    private val settingMinutes = mutableMapOf<String, Long>()
+
+    private fun format(minutes: Long): String {
+        val time = java.time.LocalTime.of((minutes / 60).toInt() % 24, (minutes % 60).toInt())
+        return android.text.format.DateFormat.getTimeFormat(requireContext())
+            .format(java.util.Date.from(time.atDate(java.time.LocalDate.now())
+                .atZone(java.time.ZoneId.systemDefault()).toInstant()))
     }
 
     private fun switch(settings: Bundle, key: String, title: Int, summary: Int): Preference? {

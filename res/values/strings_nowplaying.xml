@@ -24,6 +24,45 @@
     <string name="nowplaying_screen_on">Recognise when the screen turns on</string>
     <string name="nowplaying_screen_on_summary">Useful with the recognition period set to Never, to only recognise when needed</string>
 
+    <string name="nowplaying_bedtime">Pause at night</string>
+    <string name="nowplaying_bedtime_summary">No automatic recognitions overnight, to save battery</string>
+    <string name="nowplaying_bedtime_start">Start time</string>
+    <string name="nowplaying_bedtime_end">End time</string>
+
+    <string name="nowplaying_recognise">Recognise now</string>
+    <string name="nowplaying_recognise_summary">Listen for the song that\'s playing</string>
+    <string name="nowplaying_recognise_recording">Listening…</string>
+    <string name="nowplaying_recognise_recognising">Recognising…</string>
+    <string name="nowplaying_recognise_no_match">No song matched. Try again.</string>
+    <string name="nowplaying_recognise_skipped">Recognition skipped: %1$s</string>
+    <string name="nowplaying_recognise_on_call">the phone is in a call</string>
+    <string name="nowplaying_recognise_music_playing">music is playing on this phone</string>
+    <string name="nowplaying_recognise_system_user">only works for the primary user</string>
+    <string name="nowplaying_recognise_audio_failed">Couldn\'t record audio. Try again.</string>
+    <string name="nowplaying_recognise_failed">Recognition failed. Try again.</string>
+    <string name="nowplaying_recognise_disabled">Turn on Now Playing first.</string>
+    <string name="nowplaying_recognise_retry">Retry</string>
+
+    <string name="nowplaying_database">Music database</string>
+    <string name="nowplaying_database_summary">%1$s songs, from %2$s</string>
+    <string name="nowplaying_database_none">No database yet</string>
+    <string name="nowplaying_database_installed">Installed database</string>
+    <string name="nowplaying_database_installed_summary">Version %1$d from %2$s, %3$s songs (%4$s)</string>
+    <string name="nowplaying_database_update_now">Update now</string>
+    <string name="nowplaying_database_update_now_summary">Download the newest database</string>
+    <string name="nowplaying_database_updating">Updating…</string>
+    <string name="nowplaying_database_warning_title">Connect to Google?</string>
+    <string name="nowplaying_database_warning">Updating connects to Google\'s servers (and GitHub for the list of the newest version) to download the song database. Nothing about you or what you listen to is sent. The connection is closed as soon as the download is done.</string>
+    <string name="nowplaying_database_update">Update</string>
+    <string name="nowplaying_database_automatic">Automatic updates</string>
+    <string name="nowplaying_database_automatic_summary">Connects to Google only to download a newer database, at noon</string>
+    <string name="nowplaying_database_interval">How often</string>
+    <string name="nowplaying_database_wifi">Wi-Fi only</string>
+    <string name="nowplaying_database_wifi_summary">Only download on unmetered Wi-Fi</string>
+    <string name="nowplaying_database_charging">While charging</string>
+    <string name="nowplaying_database_charging_summary">Only download while the phone is charging</string>
+    <string name="nowplaying_database_footer">Songs are recognised with a database stored on this phone. Without updates, Now Playing never connects to the internet.</string>
+
     <string name="nowplaying_advanced">Advanced</string>
     <string name="nowplaying_alternative_encoding">Alternative encoding</string>
     <string name="nowplaying_alternative_encoding_summary">May fix distorted recordings on some devices. A higher gain may be needed with it.</string>

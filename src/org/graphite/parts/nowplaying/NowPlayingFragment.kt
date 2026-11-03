@@ -21,6 +21,8 @@ class NowPlayingFragment : PreferenceFragmentCompat() {
     private lateinit var history: Preference
     private lateinit var notifications: Preference
     private lateinit var settings: Preference
+    private lateinit var recognise: Preference
+    private lateinit var database: Preference
 
     private val observer = object : ContentObserver(Handler(Looper.getMainLooper())) {
         override fun onChange(selfChange: Boolean) = refresh()
@@ -51,12 +53,24 @@ class NowPlayingFragment : PreferenceFragmentCompat() {
             intent = Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
                 .putExtra(Settings.EXTRA_APP_PACKAGE, NowPlayingApi.ENGINE_PACKAGE)
         }
+        recognise = Preference(context).apply {
+            title = getString(R.string.nowplaying_recognise)
+            summary = getString(R.string.nowplaying_recognise_summary)
+            setOnPreferenceClickListener {
+                RecognitionDialog(requireContext()).show()
+                true
+            }
+        }
+        database = Preference(context).apply {
+            title = getString(R.string.nowplaying_database)
+            fragment = NowPlayingDatabaseFragment::class.java.name
+        }
         settings = Preference(context).apply {
             title = getString(R.string.nowplaying_settings)
             summary = getString(R.string.nowplaying_settings_summary)
             fragment = NowPlayingSettingsFragment::class.java.name
         }
-        listOf(enabled, history, notifications, settings).forEach(screen::addPreference)
+        listOf(enabled, recognise, history, notifications, database, settings).forEach(screen::addPreference)
     }
 
     override fun onResume() {
@@ -78,12 +92,21 @@ class NowPlayingFragment : PreferenceFragmentCompat() {
             enabled.isEnabled = available
             enabled.isChecked = available && state!!.getBoolean("mainEnabled")
             if (!available) enabled.summary = getString(R.string.nowplaying_unavailable)
-            listOf(history, notifications, settings).forEach { it.isEnabled = available }
+            listOf(history, notifications, settings, database).forEach { it.isEnabled = available }
+            recognise.isEnabled = available && state!!.getBoolean("mainEnabled")
             val track = state?.getString("lastTrack")
             history.summary = if (track != null) {
                 getString(R.string.nowplaying_history_last, track, state.getString("lastArtist"))
             } else {
                 getString(R.string.nowplaying_history_empty)
+            }
+            NowPlayingApi.load({ NowPlayingApi.database(context) }) { db ->
+                if (!isAdded) return@load
+                val tracks = db?.getInt("tracks") ?: 0
+                database.summary = if (tracks > 0) getString(
+                    R.string.nowplaying_database_summary,
+                    java.text.NumberFormat.getIntegerInstance().format(tracks), db!!.getString("date")
+                ) else getString(R.string.nowplaying_database_none)
             }
             notifications.summary = getString(
                 if (state?.getBoolean("notificationsEnabled") == true) R.string.nowplaying_on

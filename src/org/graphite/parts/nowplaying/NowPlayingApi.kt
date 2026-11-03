@@ -33,7 +33,19 @@ object NowPlayingApi {
         }
     }
 
+    val URI_RECOGNITION: Uri = Uri.parse("content://$AUTHORITY/recognition")
+
     fun state(context: Context): Bundle? = call(context, "getState")
+
+    fun database(context: Context): Bundle? = call(context, "getDatabase")
+
+    fun recognition(context: Context): Bundle? = call(context, "getRecognition")
+
+    fun updateDatabase(context: Context) = executor.execute { call(context, "updateDatabase") }
+
+    fun recognise(context: Context) = executor.execute { call(context, "recognise") }
+
+    fun cancelRecognition(context: Context) = executor.execute { call(context, "cancelRecognition") }
 
     fun settings(context: Context): Bundle? = call(context, "getSettings")
 
