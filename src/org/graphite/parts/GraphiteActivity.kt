@@ -47,6 +47,8 @@ class GraphiteActivity : CollapsingToolbarAppCompatActivity(),
             "org.graphite.parts.lockscreen.LockScreenFragment",
             "org.graphite.parts.powermenu.PowerMenuFragment",
             "org.graphite.parts.privacy.SecureOverrideFragment",
+            "org.graphite.parts.nowplaying.NowPlayingFragment",
+            "org.graphite.parts.nowplaying.NowPlayingSettingsFragment",
         )
     }
 }
