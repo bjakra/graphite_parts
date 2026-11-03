@@ -11,7 +11,7 @@ object GraphiteSettings {
     const val CLOCK_AM_PM = "graphite_clock_am_pm"
     const val NETWORK_TRAFFIC = "graphite_network_traffic"
     const val HIDE_NOTIFICATION_ICONS = "graphite_hide_notification_icons"
-    const val CLASSIC_POWER_MENU = "graphite_classic_power_menu"
+    const val POWER_MENU_RESTART_SUBMENU = "graphite_power_menu_restart_submenu"
     const val POWER_MENU_ACTIONS = "graphite_power_menu_actions"
     const val SECURE_OVERRIDE_PACKAGES = "graphite_secure_override_packages"
     const val SECURE_OVERRIDE_STEALTH = "graphite_secure_override_stealth"

@@ -88,7 +88,5 @@
     <string name="tile_sync">Auto-sync</string>
     <string name="weather_title">Weather</string>
     <string name="weather_summary">Weather on the lock screen, off by default</string>
-    <string name="power_menu_classic">Use Classic Power Menu</string>
-    <string name="power_menu_classic_settings">Classic Power Menu settings</string>
-    <string name="power_menu_fallback_hint">The list below is the system menu, which appears if Classic Power Menu can\'t open or is turned off.</string>
+    <string name="power_menu_restart_submenu">Group restart options under Restart</string>
 </resources>
