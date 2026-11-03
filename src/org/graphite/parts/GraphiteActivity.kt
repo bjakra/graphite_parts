@@ -50,6 +50,8 @@ class GraphiteActivity : CollapsingToolbarAppCompatActivity(),
             "org.graphite.parts.nowplaying.NowPlayingFragment",
             "org.graphite.parts.nowplaying.NowPlayingSettingsFragment",
             "org.graphite.parts.nowplaying.NowPlayingDatabaseFragment",
+            "org.graphite.parts.nowplaying.NowPlayingTracksFragment",
+            "org.graphite.parts.nowplaying.NowPlayingBackupFragment",
         )
     }
 }

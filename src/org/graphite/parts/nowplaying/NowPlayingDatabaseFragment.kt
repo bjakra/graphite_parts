@@ -21,6 +21,32 @@ class NowPlayingDatabaseFragment : PreferenceFragmentCompat() {
 
     private lateinit var installed: Preference
     private lateinit var updateNow: Preference
+    private lateinit var country: Preference
+    private lateinit var extraCountries: Preference
+    private var countries: Bundle? = null
+
+    private fun refreshCountries() {
+        val context = context ?: return
+        NowPlayingApi.load({ NowPlayingApi.countries(context) }) { result ->
+            if (!isAdded || result == null) return@load
+            countries = result
+            val codes = result.getStringArray("codes").orEmpty()
+            val names = result.getStringArray("names").orEmpty()
+            fun name(code: String?) = names.getOrNull(codes.indexOf(code)) ?: code.orEmpty()
+            val chosen = result.getString("country").orEmpty()
+            country.summary = if (chosen.isEmpty()) {
+                "${getString(R.string.nowplaying_country_automatic)} (${name(result.getString("primary"))})"
+            } else {
+                name(chosen)
+            }
+            val extras = result.getStringArray("extras").orEmpty()
+            extraCountries.summary = if (extras.isEmpty()) {
+                getString(R.string.nowplaying_extra_countries_none)
+            } else {
+                extras.joinToString { name(it) }
+            }
+        }
+    }
 
     private val observer = object : ContentObserver(Handler(Looper.getMainLooper())) {
         override fun onChange(selfChange: Boolean) = refreshDatabase()
@@ -51,8 +77,29 @@ class NowPlayingDatabaseFragment : PreferenceFragmentCompat() {
                 true
             }
         }
+        country = Preference(context).apply {
+            title = getString(R.string.nowplaying_country)
+            setOnPreferenceClickListener {
+                countries?.let { NowPlayingCountries.pickCountry(context, it, ::refreshCountries) }
+                true
+            }
+        }
+        extraCountries = Preference(context).apply {
+            title = getString(R.string.nowplaying_extra_countries)
+            setOnPreferenceClickListener {
+                countries?.let { NowPlayingCountries.pickExtraCountries(context, it, ::refreshCountries) }
+                true
+            }
+        }
         screen.addPreference(installed)
         screen.addPreference(updateNow)
+        screen.addPreference(country)
+        screen.addPreference(extraCountries)
+        screen.addPreference(Preference(context).apply {
+            title = getString(R.string.nowplaying_tracks)
+            summary = getString(R.string.nowplaying_tracks_summary)
+            fragment = NowPlayingTracksFragment::class.java.name
+        })
         NowPlayingApi.load({ NowPlayingApi.settings(context) }) { settings ->
             if (isAdded && settings != null) buildSettings(settings)
         }
@@ -136,6 +183,7 @@ class NowPlayingDatabaseFragment : PreferenceFragmentCompat() {
         super.onResume()
         requireContext().contentResolver.registerContentObserver(NowPlayingApi.URI_STATE, false, observer)
         refreshDatabase()
+        refreshCountries()
     }
 
     override fun onPause() {

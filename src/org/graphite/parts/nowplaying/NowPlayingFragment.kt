@@ -23,6 +23,8 @@ class NowPlayingFragment : PreferenceFragmentCompat() {
     private lateinit var settings: Preference
     private lateinit var recognise: Preference
     private lateinit var database: Preference
+    private lateinit var showSong: SwitchPreferenceCompat
+    private lateinit var backup: Preference
 
     private val observer = object : ContentObserver(Handler(Looper.getMainLooper())) {
         override fun onChange(selfChange: Boolean) = refresh()
@@ -70,7 +72,30 @@ class NowPlayingFragment : PreferenceFragmentCompat() {
             summary = getString(R.string.nowplaying_settings_summary)
             fragment = NowPlayingSettingsFragment::class.java.name
         }
-        listOf(enabled, recognise, history, notifications, database, settings).forEach(screen::addPreference)
+        showSong = SwitchPreferenceCompat(context).apply {
+            title = getString(R.string.nowplaying_show_song)
+            summary = getString(R.string.nowplaying_show_song_summary)
+            isPersistent = false
+            isEnabled = false
+            setOnPreferenceChangeListener { _, value ->
+                NowPlayingApi.set(context, "graphiteShowSong", value as Boolean)
+                true
+            }
+        }
+        backup = Preference(context).apply {
+            title = getString(R.string.nowplaying_backup)
+            summary = getString(R.string.nowplaying_backup_summary)
+            fragment = NowPlayingBackupFragment::class.java.name
+        }
+        listOf(enabled, recognise, history, showSong, notifications, database, settings, backup)
+            .forEach(screen::addPreference)
+
+        // Opened from the Quick Settings tile (through Graphite Now Playing): start "Recognise now"
+        if (savedInstanceState == null &&
+            activity?.intent?.getBooleanExtra("org.graphite.nowplaying.RECOGNISE", false) == true) {
+            activity?.intent?.removeExtra("org.graphite.nowplaying.RECOGNISE")
+            RecognitionDialog(requireContext()).show()
+        }
     }
 
     override fun onResume() {
@@ -92,13 +117,19 @@ class NowPlayingFragment : PreferenceFragmentCompat() {
             enabled.isEnabled = available
             enabled.isChecked = available && state!!.getBoolean("mainEnabled")
             if (!available) enabled.summary = getString(R.string.nowplaying_unavailable)
-            listOf(history, notifications, settings, database).forEach { it.isEnabled = available }
+            listOf(history, notifications, settings, database, backup).forEach { it.isEnabled = available }
             recognise.isEnabled = available && state!!.getBoolean("mainEnabled")
             val track = state?.getString("lastTrack")
             history.summary = if (track != null) {
                 getString(R.string.nowplaying_history_last, track, state.getString("lastArtist"))
             } else {
                 getString(R.string.nowplaying_history_empty)
+            }
+            NowPlayingApi.load({ NowPlayingApi.settings(context) }) { settings ->
+                if (!isAdded) return@load
+                val setting = settings?.getBundle("graphiteShowSong")
+                showSong.isEnabled = available && setting != null
+                showSong.isChecked = setting?.getBoolean("value") ?: true
             }
             NowPlayingApi.load({ NowPlayingApi.database(context) }) { db ->
                 if (!isAdded) return@load

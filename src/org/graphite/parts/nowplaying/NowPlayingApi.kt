@@ -43,6 +43,29 @@ object NowPlayingApi {
 
     fun updateDatabase(context: Context) = executor.execute { call(context, "updateDatabase") }
 
+    const val CORE_PACKAGE = "org.graphite.nowplaying"
+    val URI_BACKUP: Uri = Uri.parse("content://$AUTHORITY/backup")
+
+    fun tracks(context: Context, search: String): Bundle? = call(context, "getTracks", search)
+
+    fun backupState(context: Context): Bundle? = call(context, "getBackup")
+
+    fun backup(context: Context, uri: Uri) = executor.execute { call(context, "backup", uri.toString()) }
+
+    fun restore(context: Context, uri: Uri, options: Bundle) =
+        executor.execute { call(context, "restore", uri.toString(), options) }
+
+    fun setBackupFolder(context: Context, uri: Uri) =
+        executor.execute { call(context, "setBackupFolder", uri.toString()) }
+
+    fun countries(context: Context): Bundle? = call(context, "getCountries")
+
+    fun setCountry(context: Context, code: String) = executor.execute { call(context, "setCountry", code) }
+
+    fun setExtraCountries(context: Context, codes: Array<String>) = executor.execute {
+        call(context, "setExtraCountries", extras = Bundle().apply { putStringArray(KEY_VALUE, codes) })
+    }
+
     fun recognise(context: Context) = executor.execute { call(context, "recognise") }
 
     fun cancelRecognition(context: Context) = executor.execute { call(context, "cancelRecognition") }

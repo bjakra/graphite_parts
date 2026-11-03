@@ -9,6 +9,8 @@
     <string name="nowplaying_history">Now Playing history</string>
     <string name="nowplaying_history_last">%1$s by %2$s</string>
     <string name="nowplaying_history_empty">No recognitions yet</string>
+    <string name="nowplaying_show_song">Show the song</string>
+    <string name="nowplaying_show_song_summary">On the lock screen and in At a Glance, until it has finished</string>
     <string name="nowplaying_notifications">Notifications</string>
     <string name="nowplaying_on">On</string>
     <string name="nowplaying_off">Off</string>
@@ -61,7 +63,42 @@
     <string name="nowplaying_database_wifi_summary">Only download on unmetered Wi-Fi</string>
     <string name="nowplaying_database_charging">While charging</string>
     <string name="nowplaying_database_charging_summary">Only download while the phone is charging</string>
+    <string name="nowplaying_country">Country</string>
+    <string name="nowplaying_country_automatic">Automatic</string>
+    <string name="nowplaying_extra_countries">Extra countries</string>
+    <string name="nowplaying_extra_countries_none">None</string>
+    <string name="nowplaying_extra_countries_limit">Up to two extra countries</string>
+    <string name="nowplaying_country_download">The songs for the chosen countries have to be downloaded. Updating connects to Google\'s servers to download them; nothing about you or what you listen to is sent.</string>
+    <string name="nowplaying_country_later">Later</string>
     <string name="nowplaying_database_footer">Songs are recognised with a database stored on this phone. Without updates, Now Playing never connects to the internet.</string>
+
+    <string name="nowplaying_tracks">Songs in the database</string>
+    <string name="nowplaying_tracks_summary">See and search every song Now Playing can recognise</string>
+    <string name="nowplaying_tracks_search">Search</string>
+    <string name="nowplaying_tracks_search_summary">Title or artist</string>
+    <string name="nowplaying_tracks_loading">Loading the song list…</string>
+    <string name="nowplaying_tracks_loading_progress">Loading the song list… %1$d of %2$d</string>
+    <string name="nowplaying_tracks_total">%1$s songs</string>
+    <string name="nowplaying_tracks_matches">%1$s matches</string>
+    <string name="nowplaying_tracks_more">and %1$s more. Search to narrow it down.</string>
+
+    <string name="nowplaying_backup">Backup and restore</string>
+    <string name="nowplaying_backup_summary">History, favourites and settings</string>
+    <string name="nowplaying_backup_now">Back up</string>
+    <string name="nowplaying_backup_now_summary">Save the history, favourites and settings to a file</string>
+    <string name="nowplaying_restore">Restore</string>
+    <string name="nowplaying_restore_summary">From a Graphite or Ambient Music Mod backup</string>
+    <string name="nowplaying_restore_start">Restore</string>
+    <string name="nowplaying_restore_history">Restore the history</string>
+    <string name="nowplaying_restore_clear_history">Clear the current history first</string>
+    <string name="nowplaying_restore_favourites">Restore favourites</string>
+    <string name="nowplaying_restore_clear_favourites">Clear the current favourites first</string>
+    <string name="nowplaying_restore_settings">Restore settings</string>
+    <string name="nowplaying_backup_periodic">Automatic backups</string>
+    <string name="nowplaying_backup_periodic_summary">Back up to a folder regularly</string>
+    <string name="nowplaying_backup_interval">How often</string>
+    <string name="nowplaying_backup_folder">Folder</string>
+    <string name="nowplaying_backup_folder_summary">Where automatic backups are saved</string>
 
     <string name="nowplaying_advanced">Advanced</string>
     <string name="nowplaying_alternative_encoding">Alternative encoding</string>
