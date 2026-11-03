@@ -89,4 +89,8 @@
     <string name="weather_title">Weather</string>
     <string name="weather_summary">Weather on the lock screen, off by default</string>
     <string name="power_menu_restart_submenu">Group restart options under Restart</string>
+    <string name="double_tap_sleep_title">Double tap to sleep</string>
+    <string name="double_tap_sleep_summary">Double tap an empty area of the lock screen to turn the screen off</string>
+    <string name="double_tap_wake_title">Double tap to wake</string>
+    <string name="double_tap_wake_summary">Double tap the screen while it is off to wake the phone</string>
 </resources>
