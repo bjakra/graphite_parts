@@ -1,0 +1,9 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp" android:height="24dp" android:viewportWidth="24" android:viewportHeight="24"
+    android:tint="?android:attr/colorControlNormal">
+    <!-- A picture with an object floating in front of it -->
+    <path android:fillColor="@android:color/white"
+        android:pathData="M5,3h11a2,2 0,0 1,2 2v2h-2V5H5v11h2v2H5a2,2 0,0 1,-2 -2V5a2,2 0,0 1,2 -2z" />
+    <path android:fillColor="@android:color/white"
+        android:pathData="M15,8a6.5,6.5 0,1 1,0 13a6.5,6.5 0,1 1,0 -13z" />
+</vector>

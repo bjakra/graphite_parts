@@ -90,6 +90,8 @@
     <string name="tile_headsup">Heads-up</string>
     <string name="tile_aod">Always-on display</string>
     <string name="tile_sync">Auto-sync</string>
+    <string name="depth_wallpaper_title">3D wallpaper</string>
+    <string name="depth_wallpaper_summary">A picture in layers that move as you tilt the phone</string>
     <string name="weather_title">Weather</string>
     <string name="weather_summary">Weather on the lock screen, off by default</string>
     <string name="power_menu_restart_submenu">Group restart options under Restart</string>

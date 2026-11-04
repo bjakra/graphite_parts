@@ -38,6 +38,16 @@
         android:fragment="org.graphite.parts.nowplaying.NowPlayingFragment" />
 
     <Preference
+        android:title="@string/depth_wallpaper_title"
+        android:summary="@string/depth_wallpaper_summary"
+        android:icon="@drawable/ic_depth_wallpaper">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetClass="org.graphite.depthwallpaper.EditorActivity"
+            android:targetPackage="org.graphite.depthwallpaper" />
+    </Preference>
+
+    <Preference
         android:title="@string/weather_title"
         android:summary="@string/weather_summary"
         android:icon="@drawable/ic_weather">
