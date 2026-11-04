@@ -48,6 +48,12 @@
     <string name="nowplaying_database">Music database</string>
     <string name="nowplaying_database_summary">%1$s songs, from %2$s</string>
     <string name="nowplaying_database_none">No database yet</string>
+    <string name="nowplaying_database_missing">Not downloaded yet, so no songs can be recognised. Download it with Update now</string>
+    <string name="nowplaying_database_downloading">Downloading…</string>
+    <string name="nowplaying_database_download_title">Download the song database?</string>
+    <string name="nowplaying_database_download_message">Now Playing recognises songs with a database stored on your phone, which isn\'t downloaded yet. You can also do this later under Music database.</string>
+    <string name="nowplaying_database_download">Download</string>
+    <string name="nowplaying_database_later">Later</string>
     <string name="nowplaying_database_installed">Installed database</string>
     <string name="nowplaying_database_installed_summary">Version %1$d from %2$s, %3$s songs (%4$s)</string>
     <string name="nowplaying_database_update_now">Update now</string>

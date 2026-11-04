@@ -30,6 +30,26 @@ class NowPlayingFragment : PreferenceFragmentCompat() {
         override fun onChange(selfChange: Boolean) = refresh()
     }
 
+    /**
+     * Graphite: Now Playing can only recognise songs once its database is on the phone. After switching
+     * it on without one, offer the download, with the same notice as "Update now".
+     */
+    private fun offerDownloadIfMissing() {
+        val context = context ?: return
+        NowPlayingApi.load({ NowPlayingApi.database(context) }) { db ->
+            if (!isAdded || db == null || db.getBoolean("installed", true) || db.getBoolean("updating")) return@load
+            android.app.AlertDialog.Builder(requireContext())
+                .setTitle(R.string.nowplaying_database_download_title)
+                .setMessage(getString(R.string.nowplaying_database_download_message) + "\n\n" +
+                    getString(R.string.nowplaying_database_warning))
+                .setPositiveButton(R.string.nowplaying_database_download) { _, _ ->
+                    NowPlayingApi.updateDatabase(context)
+                }
+                .setNegativeButton(R.string.nowplaying_database_later, null)
+                .show()
+        }
+    }
+
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         val context = preferenceManager.context
         val screen = preferenceManager.createPreferenceScreen(context)
@@ -42,6 +62,7 @@ class NowPlayingFragment : PreferenceFragmentCompat() {
             isEnabled = false
             setOnPreferenceChangeListener { _, value ->
                 NowPlayingApi.setEnabled(context, value as Boolean)
+                if (value) offerDownloadIfMissing()
                 true
             }
         }
@@ -136,10 +157,17 @@ class NowPlayingFragment : PreferenceFragmentCompat() {
             NowPlayingApi.load({ NowPlayingApi.database(context) }) { db ->
                 if (!isAdded) return@load
                 val tracks = db?.getInt("tracks") ?: 0
-                database.summary = if (tracks > 0) getString(
-                    R.string.nowplaying_database_summary,
-                    java.text.NumberFormat.getIntegerInstance().format(tracks), db!!.getString("date")
-                ) else getString(R.string.nowplaying_database_none)
+                database.summary = when {
+                    db?.getBoolean("updating") == true -> getString(R.string.nowplaying_database_downloading)
+                    // Graphite: the songs of this version were never downloaded, so nothing can be recognised
+                    db != null && !db.getBoolean("installed", true) ->
+                        getString(R.string.nowplaying_database_missing)
+                    tracks > 0 -> getString(
+                        R.string.nowplaying_database_summary,
+                        java.text.NumberFormat.getIntegerInstance().format(tracks), db!!.getString("date")
+                    )
+                    else -> getString(R.string.nowplaying_database_none)
+                }
             }
             notifications.summary = getString(
                 if (state?.getBoolean("notificationsEnabled") == true) R.string.nowplaying_on
