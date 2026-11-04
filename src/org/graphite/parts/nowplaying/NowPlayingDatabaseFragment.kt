@@ -111,6 +111,7 @@ class NowPlayingDatabaseFragment : PreferenceFragmentCompat() {
         val interval = settings.getBundle("automaticMusicDatabaseUpdatesInterval")
         val intervalPref = interval?.let { setting ->
             ListPreference(context).apply {
+                key = "database_interval"
                 title = getString(R.string.nowplaying_database_interval)
                 dialogTitle = title
                 isPersistent = false

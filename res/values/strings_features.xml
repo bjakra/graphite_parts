@@ -54,6 +54,9 @@
     <string name="lockscreen_summary">Charging information</string>
     <string name="charging_info_title">Charging information</string>
     <string name="charging_info_summary">While charging, show current, voltage, power and battery temperature</string>
+    <string name="at_a_glance_category">At a Glance</string>
+    <string name="lockscreen_at_a_glance_title">Show on the lock screen</string>
+    <string name="lockscreen_at_a_glance_summary">Date, next alarm, Do Not Disturb and media on the lock screen and always-on display</string>
 
     <!-- Power menu -->
     <string name="power_menu_title">Power menu</string>

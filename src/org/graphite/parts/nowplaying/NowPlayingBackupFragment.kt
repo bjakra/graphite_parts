@@ -94,6 +94,7 @@ class NowPlayingBackupFragment : PreferenceFragmentCompat() {
         }
         val intervalPref = interval?.let { setting ->
             ListPreference(context).apply {
+                key = "backup_interval"
                 title = getString(R.string.nowplaying_backup_interval)
                 dialogTitle = title
                 isPersistent = false

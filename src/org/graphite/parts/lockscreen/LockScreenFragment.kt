@@ -2,6 +2,7 @@ package org.graphite.parts.lockscreen
 
 import android.os.Bundle
 import android.provider.Settings
+import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import org.graphite.parts.GraphiteSettings
@@ -44,6 +45,18 @@ class LockScreenFragment : PreferenceFragmentCompat() {
                 summary = getString(R.string.charging_info_summary)
                 isPersistent = false
                 isChecked = Settings.Secure.getInt(context.contentResolver, key, 0) == 1
+                setOnPreferenceChangeListener { _, value ->
+                    Settings.Secure.putInt(context.contentResolver, key, if (value as Boolean) 1 else 0)
+                }
+            })
+            val glance = PreferenceCategory(context).apply { title = getString(R.string.at_a_glance_category) }
+            addPreference(glance)
+            glance.addPreference(SwitchPreferenceCompat(context).apply {
+                key = GraphiteSettings.LOCKSCREEN_AT_A_GLANCE
+                title = getString(R.string.lockscreen_at_a_glance_title)
+                summary = getString(R.string.lockscreen_at_a_glance_summary)
+                isPersistent = false
+                isChecked = Settings.Secure.getInt(context.contentResolver, key, 1) == 1
                 setOnPreferenceChangeListener { _, value ->
                     Settings.Secure.putInt(context.contentResolver, key, if (value as Boolean) 1 else 0)
                 }

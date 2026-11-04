@@ -116,6 +116,7 @@ class NowPlayingSettingsFragment : PreferenceFragmentCompat() {
         val options = setting.getStringArray("options") ?: return null
         val titles = setting.getStringArray("optionTitles") ?: options
         return ListPreference(preferenceManager.context).apply {
+            this.key = key
             this.title = getString(title)
             dialogTitle = this.title
             isPersistent = false

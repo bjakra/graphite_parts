@@ -22,6 +22,8 @@ class NowPlayingTracksFragment : PreferenceFragmentCompat() {
         val screen = preferenceManager.createPreferenceScreen(context)
         preferenceScreen = screen
         search = EditTextPreference(context).apply {
+            // Dialog preferences need a key: the dialog finds its preference by it when recreated
+            key = "tracks_search"
             title = getString(R.string.nowplaying_tracks_search)
             dialogTitle = title
             isPersistent = false

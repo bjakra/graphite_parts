@@ -8,6 +8,8 @@ object GraphiteSettings {
 
     // Read by Graphite's SystemUI patches
     const val CHARGING_INFO = "graphite_charging_info"
+    /** Default on; read by LockscreenSmartspaceGeneralView (patch 0610) */
+    const val LOCKSCREEN_AT_A_GLANCE = "graphite_lockscreen_at_a_glance"
     const val CLOCK_AM_PM = "graphite_clock_am_pm"
     const val NETWORK_TRAFFIC = "graphite_network_traffic"
     const val DOUBLE_TAP_TO_SLEEP = "double_tap_to_sleep"
