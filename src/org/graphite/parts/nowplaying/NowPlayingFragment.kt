@@ -38,15 +38,9 @@ class NowPlayingFragment : PreferenceFragmentCompat() {
         val context = context ?: return
         NowPlayingApi.load({ NowPlayingApi.database(context) }) { db ->
             if (!isAdded || db == null || db.getBoolean("installed", true) || db.getBoolean("updating")) return@load
-            android.app.AlertDialog.Builder(requireContext())
-                .setTitle(R.string.nowplaying_database_download_title)
-                .setMessage(getString(R.string.nowplaying_database_download_message) + "\n\n" +
-                    getString(R.string.nowplaying_database_warning))
-                .setPositiveButton(R.string.nowplaying_database_download) { _, _ ->
-                    NowPlayingApi.updateDatabase(context)
-                }
-                .setNegativeButton(R.string.nowplaying_database_later, null)
-                .show()
+            NowPlayingApi.load({ NowPlayingApi.countries(context) }) { countries ->
+                if (isAdded && countries != null) NowPlayingCountries.setupCountries(requireContext(), countries)
+            }
         }
     }
 
@@ -139,7 +133,11 @@ class NowPlayingFragment : PreferenceFragmentCompat() {
             val available = state?.getString("state") in setOf("available", "notSetup")
             enabled.isEnabled = available
             enabled.isChecked = state?.getString("state") == "available" && state.getBoolean("mainEnabled")
-            if (!available) enabled.summary = getString(R.string.nowplaying_unavailable)
+            enabled.summary = when {
+                !available -> getString(R.string.nowplaying_unavailable)
+                state?.getBoolean("microphoneDisabled") == true -> getString(R.string.nowplaying_microphone_off)
+                else -> getString(R.string.nowplaying_switch_summary)
+            }
             listOf(history, notifications, settings, database, backup).forEach { it.isEnabled = available }
             recognise.isEnabled = enabled.isChecked
             val track = state?.getString("lastTrack")

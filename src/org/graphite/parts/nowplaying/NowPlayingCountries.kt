@@ -32,28 +32,50 @@ object NowPlayingCountries {
     }
 
     fun pickExtraCountries(context: Context, countries: Bundle, onChanged: () -> Unit) {
+        showExtraCountries(context, countries, R.string.nowplaying_extra_countries,
+            android.R.string.ok) {
+            onChanged()
+            askToDownload(context)
+        }
+    }
+
+    /** First switch-on: asks which countries' songs to get, then downloads the database */
+    fun setupCountries(context: Context, countries: Bundle) {
+        showExtraCountries(context, countries, R.string.nowplaying_setup_countries,
+            R.string.nowplaying_database_download) {
+            NowPlayingApi.updateDatabase(context)
+        }
+    }
+
+    private fun showExtraCountries(
+        context: Context,
+        countries: Bundle,
+        title: Int,
+        confirm: Int,
+        onConfirmed: () -> Unit
+    ) {
         val primary = countries.getString("primary")
         val codes = countries.getStringArray("codes").orEmpty().filter { it != primary }
         val allCodes = countries.getStringArray("codes").orEmpty()
         val allNames = countries.getStringArray("names").orEmpty()
         val names = codes.map { allNames[allCodes.indexOf(it)] }
         val chosen = countries.getStringArray("extras").orEmpty().toMutableSet()
+        val max = countries.getInt("maxExtras", 2)
         val checked = BooleanArray(codes.size) { codes[it] in chosen }
         AlertDialog.Builder(context)
-            .setTitle(R.string.nowplaying_extra_countries)
+            .setTitle(title)
             .setMultiChoiceItems(names.toTypedArray(), checked) { dialog, which, isChecked ->
-                if (isChecked && chosen.size >= 2) {
-                    // AMM's limit: at most two extra countries
+                if (isChecked && chosen.size >= max) {
                     (dialog as AlertDialog).listView.setItemChecked(which, false)
-                    Toast.makeText(context, R.string.nowplaying_extra_countries_limit, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, context.getString(R.string.nowplaying_extra_countries_limit, max),
+                        Toast.LENGTH_SHORT).show()
                     return@setMultiChoiceItems
                 }
                 if (isChecked) chosen += codes[which] else chosen -= codes[which]
             }
-            .setPositiveButton(android.R.string.ok) { _, _ ->
+            .setPositiveButton(confirm) { _, _ ->
                 NowPlayingApi.setExtraCountries(context, chosen.toTypedArray())
-                onChanged()
-                askToDownload(context)
+                onConfirmed()
             }
             .setNegativeButton(android.R.string.cancel, null)
             .show()

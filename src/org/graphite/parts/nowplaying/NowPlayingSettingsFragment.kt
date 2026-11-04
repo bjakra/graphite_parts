@@ -40,10 +40,6 @@ class NowPlayingSettingsFragment : PreferenceFragmentCompat() {
             title = getString(R.string.nowplaying_advanced)
         }
         screen.addPreference(advanced)
-        switch(settings, "alternativeEncoding", R.string.nowplaying_alternative_encoding,
-            R.string.nowplaying_alternative_encoding_summary)?.let(advanced::addPreference)
-        switch(settings, "runOnSmallCores", R.string.nowplaying_small_cores,
-            R.string.nowplaying_small_cores_summary)?.let(advanced::addPreference)
         switch(settings, "enableLogging", R.string.nowplaying_logging,
             R.string.nowplaying_logging_summary)?.let(advanced::addPreference)
     }
