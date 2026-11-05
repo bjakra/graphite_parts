@@ -56,7 +56,9 @@
     <string name="charging_info_summary">While charging, show current, voltage, power and battery temperature</string>
     <string name="at_a_glance_category">At a Glance</string>
     <string name="lockscreen_at_a_glance_title">Show on the lock screen</string>
-    <string name="lockscreen_at_a_glance_summary">Date, next alarm, Do Not Disturb and media on the lock screen and always-on display</string>
+    <string name="lockscreen_at_a_glance_summary">Date, next alarm, Do Not Disturb and media while the screen is on</string>
+    <string name="aod_at_a_glance_title">Show on the always-on display</string>
+    <string name="aod_at_a_glance_summary">Date, next alarm, Do Not Disturb and media on the always-on display</string>
 
     <!-- Power menu -->
     <string name="power_menu_title">Power menu</string>
@@ -96,5 +98,5 @@
     <string name="double_tap_sleep_title">Double tap to sleep</string>
     <string name="double_tap_sleep_summary">Double tap an empty area of the lock screen to turn the screen off</string>
     <string name="double_tap_wake_title">Double tap to wake</string>
-    <string name="double_tap_wake_summary">Double tap the screen while it is off to wake the phone</string>
+    <string name="double_tap_wake_summary">Double tap the screen while it is off to wake the phone. The first tap lights up the screen, the second one wakes it</string>
 </resources>
