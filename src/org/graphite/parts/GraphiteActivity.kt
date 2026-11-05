@@ -52,6 +52,7 @@ class GraphiteActivity : CollapsingToolbarAppCompatActivity(),
             "org.graphite.parts.nowplaying.NowPlayingDatabaseFragment",
             "org.graphite.parts.nowplaying.NowPlayingTracksFragment",
             "org.graphite.parts.nowplaying.NowPlayingBackupFragment",
+            "org.graphite.parts.keybox.KeyboxFragment",
         )
     }
 }

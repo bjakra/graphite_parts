@@ -103,4 +103,8 @@
     <!-- Keybox for sandboxed Google Play's key attestation (GmsCompat screen) -->
     <string name="keybox_title">Play Integrity keybox</string>
     <string name="keybox_summary">Use your own keybox for Google Play, off by default</string>
+    <string name="keybox_manage_title">Keybox</string>
+    <string name="keybox_manage_summary">Add, turn on or remove your keybox for Google Play</string>
+    <string name="keybox_all_apps_title">Apply to all apps</string>
+    <string name="keybox_all_apps_summary">Also use the keybox for other apps that check key attestation, not just Google Play. Off by default. Needs a keybox that\'s added and turned on.</string>
 </resources>

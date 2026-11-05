@@ -34,12 +34,8 @@
         android:key="play_keybox"
         android:title="@string/keybox_title"
         android:summary="@string/keybox_summary"
-        android:icon="@drawable/ic_keybox">
-        <intent
-            android:action="org.graphite.parts.keybox.SETTINGS"
-            android:targetPackage="app.grapheneos.gmscompat"
-            android:targetClass="app.grapheneos.gmscompat.keybox.KeyboxActivity" />
-    </Preference>
+        android:icon="@drawable/ic_keybox"
+        android:fragment="org.graphite.parts.keybox.KeyboxFragment" />
 
     <Preference
         android:key="nowplaying"

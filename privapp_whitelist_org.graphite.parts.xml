@@ -2,6 +2,7 @@
 <permissions>
     <privapp-permissions package="org.graphite.parts">
         <permission name="android.permission.WRITE_SECURE_SETTINGS" />
+        <permission name="android.permission.CHANGE_COMPONENT_ENABLED_STATE" />
         <permission name="app.grapheneos.gmscompat.SHOW_UI" />
     </privapp-permissions>
 </permissions>
