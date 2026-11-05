@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <!-- Now Playing page: Graphite Now Playing's interface (signature permission it defines) -->
     <uses-permission android:name="org.graphite.nowplaying.ACCESS_SERVICE" />
+    <!-- Opens GmsCompat's per-user Play keybox screen -->
+    <uses-permission android:name="app.grapheneos.gmscompat.SHOW_UI" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />

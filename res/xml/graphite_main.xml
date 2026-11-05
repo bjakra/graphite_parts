@@ -31,6 +31,17 @@
         android:fragment="org.graphite.parts.privacy.SecureOverrideFragment" />
 
     <Preference
+        android:key="play_keybox"
+        android:title="@string/keybox_title"
+        android:summary="@string/keybox_summary"
+        android:icon="@drawable/ic_keybox">
+        <intent
+            android:action="org.graphite.parts.keybox.SETTINGS"
+            android:targetPackage="app.grapheneos.gmscompat"
+            android:targetClass="app.grapheneos.gmscompat.keybox.KeyboxActivity" />
+    </Preference>
+
+    <Preference
         android:key="nowplaying"
         android:title="@string/nowplaying_title"
         android:summary="@string/nowplaying_summary"

@@ -2,5 +2,6 @@
 <permissions>
     <privapp-permissions package="org.graphite.parts">
         <permission name="android.permission.WRITE_SECURE_SETTINGS" />
+        <permission name="app.grapheneos.gmscompat.SHOW_UI" />
     </privapp-permissions>
 </permissions>
