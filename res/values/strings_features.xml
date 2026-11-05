@@ -100,7 +100,7 @@
     <string name="double_tap_wake_title">Double tap to wake</string>
     <string name="double_tap_wake_summary">Double tap the screen while it is off to wake the phone. The first tap lights up the screen, the second one wakes it</string>
 
-    <!-- Sandboxed Play services key attestation -->
-    <string name="keybox_title">Play keybox</string>
-    <string name="keybox_summary">Custom key attestation for sandboxed Play services, off by default</string>
+    <!-- Keybox for sandboxed Google Play's key attestation (GmsCompat screen) -->
+    <string name="keybox_title">Play Integrity keybox</string>
+    <string name="keybox_summary">Use your own keybox for Google Play, off by default</string>
 </resources>
