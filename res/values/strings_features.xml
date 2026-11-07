@@ -112,4 +112,39 @@
     <string name="native_hook_warn_title">Turn off a security protection?</string>
     <string name="native_hook_warn_message">This turns off exec-based spawning — a GrapheneOS exploit-protection hardening — for Google Play services only, so the bundled Zygisk module (ReZygisk + Play Integrity Fork) can hook Play Integrity. Everything else keeps the protection.\n\nGoogle Play services is a large attack surface, so only enable this if you understand the trade-off. Play services will restart.</string>
     <string name="native_hook_warn_confirm">Turn off for Play services</string>
+
+    <!-- System app memory code loading (patch 0655) -->
+    <string name="system_dcl_title">System app code loading</string>
+    <string name="system_dcl_summary">For LSPosed and its modules, off by default</string>
+    <string name="system_dcl_explanation">GrapheneOS never lets system apps load code from memory. LSPosed\'s manager runs inside the Shell app, and many modules run inside system apps, so they need this.</string>
+    <string name="system_dcl_switch_title">Let system apps be allowed individually</string>
+    <string name="system_dcl_switch_summary">Adds the \"Dynamic code loading via memory\" switch to system apps in Settings. Each app stays restricted until you change it there, and it applies the next time that app starts.</string>
+    <string name="system_dcl_shell_title">Open Shell app settings</string>
+    <string name="system_dcl_shell_summary">LSPosed\'s manager needs this: open Exploit protection, then allow dynamic code loading via memory</string>
+    <string name="system_dcl_warn_title">Turn off a security protection?</string>
+    <string name="system_dcl_warn_message">This lets you weaken a GrapheneOS exploit protection for system apps. A system app you allow can run code from memory, so a compromise of that app is harder to contain.\n\nNothing changes until you allow a specific app. Only do this if you understand the trade-off.</string>
+    <string name="system_dcl_warn_confirm">Turn on</string>
+
+    <!-- Play Integrity Fork submenu (shown once the native hook is on) -->
+    <string name="pif_title">Play Integrity Fork</string>
+    <string name="pif_summary">Fingerprint, updates and spoofing options of the bundled module</string>
+    <string name="pif_status_title">Status</string>
+    <string name="pif_status_waiting">Waiting for the module controller. It runs with KernelSU after the phone starts.</string>
+    <string name="pif_fingerprint_title">Device fingerprint</string>
+    <string name="pif_fingerprint_none">None yet. It is fetched from Google once the module is active.</string>
+    <string name="pif_fingerprint_update_title">Update fingerprint now</string>
+    <string name="pif_fingerprint_update_summary">Fetch the current Pixel Canary fingerprint from Google. It is also refreshed weekly.</string>
+    <string name="pif_update_now_title">Check for module updates</string>
+    <string name="pif_update_now_summary">Install newer releases of Play Integrity Fork and ReZygisk from GitHub, checked against GitHub\'s SHA-256</string>
+    <string name="pif_auto_update_title">Automatic updates</string>
+    <string name="pif_auto_update_summary">Check GitHub for newer module releases once a week. A version you installed yourself is never downgraded.</string>
+    <string name="pif_requested">Requested, this takes up to a minute</string>
+    <string name="pif_advanced_title">Advanced</string>
+    <string name="pif_spoof_build_title">Spoof build fields</string>
+    <string name="pif_spoof_props_title">Spoof system properties</string>
+    <string name="pif_spoof_provider_title">Spoof keystore provider</string>
+    <string name="pif_spoof_signature_title">Spoof ROM signature</string>
+    <string name="pif_spoof_vending_finger_title">Spoof fingerprint for the Play Store</string>
+    <string name="pif_spoof_vending_sdk_title">Spoof SDK level for the Play Store</string>
+    <string name="pif_verbose_title">Verbose logs</string>
 </resources>

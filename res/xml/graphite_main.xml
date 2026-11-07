@@ -38,6 +38,13 @@
         android:fragment="org.graphite.parts.keybox.KeyboxFragment" />
 
     <Preference
+        android:key="system_dcl"
+        android:title="@string/system_dcl_title"
+        android:summary="@string/system_dcl_summary"
+        android:icon="@drawable/ic_keybox"
+        android:fragment="org.graphite.parts.privacy.SystemDclFragment" />
+
+    <Preference
         android:key="nowplaying"
         android:title="@string/nowplaying_title"
         android:summary="@string/nowplaying_summary"

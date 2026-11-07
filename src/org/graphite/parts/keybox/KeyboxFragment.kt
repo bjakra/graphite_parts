@@ -1,6 +1,5 @@
 package org.graphite.parts.keybox
 
-import android.app.AlertDialog
 import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.ApplicationInfo
@@ -8,20 +7,22 @@ import android.content.pm.GosPackageState
 import android.content.pm.PackageManager
 import android.ext.settings.app.AswUseExecSpawning
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.provider.Settings
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
+import org.graphite.parts.GraphiteSettings
 import org.graphite.parts.R
+import org.graphite.parts.showConfirmCountdown
 
 /**
- * Play Integrity settings. The keybox (import, turn on, delete) and the device-fingerprint controls
- * live in GmsCompat's own screen; this fragment adds the system-level switches GraphiteParts is
- * privileged to set: the keybox "apply to all apps" switch, and the "strong integrity native hook"
- * switch, which turns off exec-spawning for sandboxed Google Play services so a Zygisk module
- * (bundled ReZygisk + Play Integrity Fork) can hook DroidGuard. The latter disables a GrapheneOS
- * exploit mitigation for that one process, so it is gated behind a warning with a countdown.
+ * Play Integrity settings. The keybox (import, turn on, delete) lives in GmsCompat's own screen;
+ * this fragment adds the system-level switches GraphiteParts is privileged to set: the keybox "apply
+ * to all apps" switch, and the "strong integrity native hook" switch, which turns off exec-spawning
+ * for sandboxed Google Play services and turns on the bundled Zygisk modules (ReZygisk + Play
+ * Integrity Fork) so they can hook DroidGuard. The latter disables a GrapheneOS exploit mitigation
+ * for that one process, so it is gated behind a warning with a countdown. Once it is on, the Play
+ * Integrity Fork submenu ([PifFragment]) appears.
  */
 class KeyboxFragment : PreferenceFragmentCompat() {
 
@@ -32,6 +33,7 @@ class KeyboxFragment : PreferenceFragmentCompat() {
     private val gmsPackage = "com.google.android.gms"
 
     private lateinit var nativeHookPref: SwitchPreferenceCompat
+    private lateinit var pifPref: Preference
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         val context = preferenceManager.context
@@ -79,17 +81,28 @@ class KeyboxFragment : PreferenceFragmentCompat() {
                     false
                 } else {
                     setExecSpawning(gmsEnabled = true) // restore the default (exec-spawning on)
+                    setModulesEnabled(false)
+                    pifPref.isVisible = false
                     true
                 }
             }
         }
         screen.addPreference(nativeHookPref)
+
+        pifPref = Preference(context).apply {
+            title = getString(R.string.pif_title)
+            summary = getString(R.string.pif_summary)
+            fragment = PifFragment::class.java.name
+            isVisible = nativeHookPref.isChecked
+        }
+        screen.addPreference(pifPref)
     }
 
     override fun onResume() {
         super.onResume()
         if (::nativeHookPref.isInitialized) {
             nativeHookPref.isChecked = isNativeHookOn()
+            pifPref.isVisible = nativeHookPref.isChecked
         }
     }
 
@@ -104,38 +117,13 @@ class KeyboxFragment : PreferenceFragmentCompat() {
     }
 
     private fun confirmEnableNativeHook() {
-        val context = preferenceManager.context
-        val dialog = AlertDialog.Builder(context)
-            .setTitle(R.string.native_hook_warn_title)
-            .setMessage(R.string.native_hook_warn_message)
-            .setPositiveButton(R.string.native_hook_warn_confirm) { _, _ ->
-                setExecSpawning(gmsEnabled = false) // turn exec-spawning OFF for GMS
-                nativeHookPref.isChecked = isNativeHookOn()
-            }
-            .setNegativeButton(android.R.string.cancel, null)
-            .create()
-        dialog.show()
-
-        // Keep the confirm button disabled for a 10 s countdown so the choice is deliberate.
-        val confirm = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-        val label = getString(R.string.native_hook_warn_confirm)
-        val handler = Handler(Looper.getMainLooper())
-        var remaining = 10
-        confirm.isEnabled = false
-        val tick = object : Runnable {
-            override fun run() {
-                if (!dialog.isShowing) return
-                if (remaining > 0) {
-                    confirm.text = "$label ($remaining)"
-                    remaining--
-                    handler.postDelayed(this, 1000)
-                } else {
-                    confirm.text = label
-                    confirm.isEnabled = true
-                }
-            }
+        showConfirmCountdown(preferenceManager.context, R.string.native_hook_warn_title,
+            R.string.native_hook_warn_message, R.string.native_hook_warn_confirm) {
+            setExecSpawning(gmsEnabled = false) // turn exec-spawning OFF for GMS
+            nativeHookPref.isChecked = isNativeHookOn()
+            setModulesEnabled(nativeHookPref.isChecked)
+            pifPref.isVisible = nativeHookPref.isChecked
         }
-        handler.post(tick)
     }
 
     private fun gmsAppInfo(): ApplicationInfo? = runCatching {
@@ -159,5 +147,11 @@ class KeyboxFragment : PreferenceFragmentCompat() {
             editor.killUidAfterApply()
             editor.apply()
         }
+    }
+
+    /** Tells the root controller (graphite-pi.sh) to install + enable, or disable, the modules. */
+    private fun setModulesEnabled(enabled: Boolean) {
+        Settings.Secure.putInt(preferenceManager.context.contentResolver,
+            GraphiteSettings.PIF_ENABLED, if (enabled) 1 else 0)
     }
 }
